@@ -1,0 +1,1 @@
+-- Fichier obsolète : utilise sql/bdd_complete.sql à la place.

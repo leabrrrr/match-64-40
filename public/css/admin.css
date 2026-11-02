@@ -1,0 +1,36 @@
+/* ==========================================================
+   PAGES ADMIN
+   ========================================================== */
+
+.texte-aide {
+    color: var(--texte-clair);
+    margin: -4px 0 20px;
+}
+
+.carte-formulaire-admin {
+    max-width: 720px;
+}
+
+.carte-formulaire-admin h1 {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 2.6em;
+    text-transform: uppercase;
+    color: var(--encre);
+}
+
+/* Liens "Voir / Modifier" dans le tableau des matchs */
+.lien-action {
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 14px;
+}
+
+.lien-action:hover {
+    text-decoration: underline;
+}
+
+/* Dans une carte crème, le texte d'aide est plus foncé */
+.carte .texte-aide {
+    color: var(--texte-doux);
+}

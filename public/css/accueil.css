@@ -1,0 +1,375 @@
+/* ==========================================================
+   PAGE D'ACCUEIL : LISTE DES MATCHS
+   ========================================================== */
+
+/* ===== Bandeau du haut ===== */
+.bandeau {
+    padding: 40px 0 50px;
+    overflow: hidden;
+}
+
+/* Grand titre sur deux lignes, comme "VAMOS TOROS" chez Toulouse */
+.titre-geant {
+    position: relative;
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: clamp(90px, 19vw, 250px);
+    line-height: 0.82;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 40px;
+}
+
+.ligne-pleine,
+.ligne-contour {
+    display: block;
+}
+
+.ligne-pleine {
+    color: var(--creme);
+}
+
+/* Ligne en contour : texte transparent avec seulement le trait */
+.ligne-contour {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--creme);
+}
+
+/* Le ballon entre 64 et 40 : sa taille suit celle du texte (em) */
+.titre-geant .ballon-geant {
+    width: 0.62em;
+    height: 0.62em;
+    margin: 0 0.08em;
+    vertical-align: 0.06em;
+    border-radius: 50%;
+    box-shadow: 0 20px 70px rgba(227, 2, 42, 0.45);
+}
+
+.etiquette {
+    font-family: var(--police-titre);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--accent-clair);
+    margin: 0 0 14px;
+}
+
+/* Grand paragraphe avec retrait de première ligne (comme Toulouse) */
+.bandeau-texte {
+    font-size: clamp(1.2em, 2.4vw, 1.9em);
+    line-height: 1.3;
+    font-weight: 500;
+    text-indent: 2em;
+    max-width: 900px;
+    margin: 0 0 34px;
+}
+
+/* ===== Onglets de période ===== */
+.onglets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-bottom: 14px;
+}
+
+.onglet {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 1.7em;
+    text-transform: uppercase;
+    color: var(--texte-clair);
+    text-decoration: none;
+    padding: 0 10px 4px 0;
+    border-bottom: 3px solid transparent;
+}
+
+.onglet:hover {
+    color: var(--creme);
+}
+
+.onglet.actif {
+    color: var(--creme);
+    border-bottom-color: var(--accent);
+}
+
+/* ===== Barre de filtres (club, niveau, recherche) ===== */
+/* Grille : club (large) | niveau | recherche (large) | bouton */
+.barre-filtres {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr auto;
+    align-items: end;
+    gap: 14px;
+    background-color: var(--fond-clair);
+    padding: 18px 20px;
+    margin-bottom: 30px;
+    border-left: 4px solid var(--accent);
+}
+
+.filtre {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;   /* évite qu'un nom de club très long élargisse la colonne */
+}
+
+.filtre label {
+    font-family: var(--police-titre);
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--texte-clair);
+}
+
+.barre-filtres select,
+.barre-filtres input[type=text] {
+    background-color: var(--creme);
+    border: none;
+}
+
+.filtre-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.effacer {
+    font-family: var(--police-titre);
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--texte-clair);
+}
+
+/* ===== Titre de la liste ===== */
+.titre-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.titre-section h2 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--texte-clair);
+}
+
+.compteur {
+    font-family: var(--police-titre);
+    background-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.78em;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+/* Titre de chaque jour : "SAMEDI 26 SEPTEMBRE 2026" */
+.titre-jour {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 2.4em;
+    text-transform: uppercase;
+    color: var(--creme);
+    margin: 40px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Trait qui prolonge le titre du jour */
+.titre-jour::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: var(--degrade);
+}
+
+/* ===== Cartes des matchs (grille) ===== */
+.liste-matchs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+}
+
+.carte-match {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--creme);
+    color: var(--encre);
+    text-decoration: none;
+    padding: 18px 20px 20px;
+    /* coins coupés */
+    clip-path: polygon(0 0, calc(100% - var(--coin)) 0, 100% var(--coin),
+                       100% 100%, var(--coin) 100%, 0 calc(100% - var(--coin)));
+    transition: transform 0.15s, background-color 0.15s;
+}
+
+.carte-match:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+}
+
+/* Haut de la carte : heure + division + niveau */
+.carte-haut {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bordure);
+}
+
+.ligne-heure {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.carte-heure {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 2em;
+    line-height: 1;
+    color: var(--accent);
+}
+
+.ligne-division {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.competition {
+    font-family: var(--police-titre);
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--texte-doux);
+}
+
+/* Milieu : les deux équipes face à face */
+.face-a-face {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 8px;
+    padding: 18px 0 10px;
+    flex: 1;
+}
+
+.equipe-bloc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.equipe-bloc .logo-club {
+    width: 64px;
+    height: 64px;
+    padding: 4px;
+}
+
+.equipe-bloc .logo-club.initiales {
+    font-size: 1.1em;
+}
+
+.equipe {
+    font-family: var(--police-titre);
+    font-weight: 700;
+    font-size: 0.82em;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.face-a-face .vs {
+    font-size: 1.8em;
+    margin-top: 16px;
+}
+
+/* Étiquette "Déplacement" (onglet Nos clubs à l'extérieur) */
+.badge-deplacement {
+    display: inline-block;
+    font-family: var(--police-titre);
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: var(--violet);
+    padding: 1px 7px;
+    margin-right: 4px;
+}
+
+.meta {
+    font-size: 0.82em;
+    color: var(--texte-doux);
+    text-align: center;
+    margin: 0 0 14px;
+}
+
+/* Faux bouton "Infos pratiques" en bas de la carte */
+.voir {
+    display: block;
+    text-align: center;
+    font-family: var(--police-titre);
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px;
+    border: 1px solid var(--encre);
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.carte-match:hover .voir {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* Aucun match */
+.vide {
+    text-align: center;
+    border: 2px dashed rgba(236, 229, 216, 0.3);
+    padding: 50px 20px;
+}
+
+.vide h3 {
+    margin-top: 16px;
+    font-size: 1.6em;
+}
+
+.vide p {
+    color: var(--texte-clair);
+    margin-bottom: 20px;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 700px) {
+    .bandeau {
+        padding-top: 24px;
+    }
+
+    .bandeau-texte {
+        text-indent: 1em;
+    }
+
+    .barre-filtres {
+        grid-template-columns: 1fr;
+    }
+
+    .onglet {
+        font-size: 1.3em;
+    }
+
+    .titre-jour {
+        font-size: 1.8em;
+    }
+
+    .liste-matchs {
+        grid-template-columns: 1fr;
+    }
+}

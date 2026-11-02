@@ -1,0 +1,66 @@
+/* ==========================================================
+   PIED DE PAGE
+   ========================================================== */
+.pied {
+    background-color: #0b0c24;
+    color: var(--texte-clair);
+    margin-top: 40px;
+    overflow: hidden;
+    border-top: 4px solid transparent;
+    border-image: var(--degrade) 1;
+}
+
+/* Très grand texte décoratif en contour, qui dépasse sur les côtés */
+.pied-geant {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: clamp(60px, 14vw, 190px);
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(236, 229, 216, 0.25);
+    padding-top: 30px;
+}
+
+.pied-contenu {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 20px;
+    padding-bottom: 28px;
+}
+
+.pied p {
+    margin: 10px 0 0;
+    font-size: 0.92em;
+}
+
+.pied-liens {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pied-liens a {
+    font-family: var(--police-titre);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--creme);
+    text-decoration: none;
+}
+
+.pied-liens a:hover {
+    color: var(--accent-clair);
+}
+
+.pied-bas {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+    padding-bottom: 20px;
+    font-size: 0.82em;
+}

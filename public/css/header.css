@@ -1,0 +1,654 @@
+/* ==========================================================
+   STYLES COMMUNS À TOUTES LES PAGES + ENTÊTE
+   Inspiration : site du Toulouse Basketball Club
+   (fond sombre, cartes crème aux coins coupés, grands titres étroits)
+   ========================================================== */
+
+/* Couleurs du site : on les change ici et c'est modifié partout.
+   Pour un rendu "bordeaux" comme Toulouse, remplace --fond par #4d0b2b */
+:root {
+    --fond: #121433;            /* fond sombre de la page (bleu nuit FFBB) */
+    --fond-clair: #1c1f4d;
+    --creme: #ece5d8;           /* couleur des cartes */
+    --creme-fonce: #d9cfbd;
+    --encre: #16183d;           /* texte sur les cartes crème */
+    --texte-doux: #5f5b72;      /* texte secondaire sur crème */
+    --texte-clair: #b9b7d3;     /* texte secondaire sur fond sombre */
+    --marine: #1a1d5c;
+    --marine-clair: #2b2a7b;
+    --violet: #7a1d57;
+    --accent: #e3022a;          /* rouge FFBB */
+    --accent-fonce: #b8001f;
+    --accent-clair: #ff5a73;
+    --degrade: linear-gradient(90deg, #2b2a7b 0%, #7a1d57 50%, #e3022a 100%);
+    --vert: #1a7f4b;
+    --vert-pale: #dcefe2;
+    --ambre: #a54a06;
+    --ambre-pale: #f7e3c7;
+    --rouge: #b3261e;
+    --rouge-pale: #f6dcd8;
+    --bordure: #cfc5b3;         /* traits sur les cartes crème */
+
+    /* Polices */
+    --police-geante: 'Big Shoulders Display', Impact, sans-serif;
+    --police-titre: 'Chakra Petch', Arial, sans-serif;
+    --police-texte: 'Inter', Arial, sans-serif;
+
+    /* Taille des coins coupés */
+    --coin: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--police-texte);
+    font-size: 16px;
+    line-height: 1.55;
+    background-color: var(--fond);
+    color: var(--creme);
+}
+
+h1, h2, h3 {
+    font-family: var(--police-titre);
+    line-height: 1.15;
+    margin: 0 0 12px;
+}
+
+a {
+    color: var(--accent-clair);
+}
+
+/* Largeur maximale du contenu, centré */
+.conteneur {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page {
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
+
+main {
+    min-height: 65vh;
+}
+
+/* ===== Les coins coupés (la signature du style) =====
+   clip-path découpe l'élément selon un polygone : ici on coupe
+   le coin en haut à droite et le coin en bas à gauche. */
+.coins-coupes,
+.carte,
+.stat {
+    clip-path: polygon(0 0, calc(100% - var(--coin)) 0, 100% var(--coin),
+                       100% 100%, var(--coin) 100%, 0 calc(100% - var(--coin)));
+}
+
+/* ===== Entête ===== */
+.entete {
+    background-color: var(--fond);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Fin liseré dégradé sous l'entête, aux couleurs de la FFBB */
+.entete::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background: var(--degrade);
+}
+
+.entete-contenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 72px;
+}
+
+.marque {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 1.6em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--creme);
+    text-decoration: none;
+}
+
+.marque strong {
+    color: var(--accent);
+}
+
+/* Logo du site (le ballon) : utilisé dans l'entête, le titre, le pied de page...
+   Le chemin est relatif au fichier CSS : public/css/ → public/img/logo.png */
+.ballon {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    background: url(../img/logo.png) center / contain no-repeat;
+    flex-shrink: 0;
+}
+
+.ballon-moyen {
+    width: 46px;
+    height: 46px;
+}
+
+.ballon-grand {
+    width: 70px;
+    height: 70px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.menu a {
+    font-family: var(--police-titre);
+    font-weight: 600;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--creme);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-bottom: 2px solid transparent;
+}
+
+.menu a:hover,
+.menu a.actif {
+    border-bottom-color: var(--accent);
+}
+
+/* ===== Boutons (coins coupés, texte en majuscules) ===== */
+.bouton,
+button {
+    display: inline-block;
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-family: var(--police-titre);
+    font-size: 0.9em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: background-color 0.15s;
+}
+
+.bouton:hover,
+button:hover {
+    background-color: var(--accent-fonce);
+}
+
+.menu a.bouton {
+    color: #fff;
+    border-bottom: none;
+    margin-left: 8px;
+}
+
+.bouton-petit,
+.menu a.bouton-petit {
+    padding: 7px 14px;
+    font-size: 0.78em;
+}
+
+.bouton-large {
+    width: 100%;
+    padding: 14px;
+}
+
+/* Bouton clair (sur fond sombre) */
+.bouton-contour,
+.menu a.bouton-contour {
+    background-color: var(--creme);
+    color: var(--encre);
+}
+
+.bouton-contour:hover,
+.menu a.bouton-contour:hover {
+    background-color: #fff;
+}
+
+/* Bouton sombre (sur carte crème) */
+.bouton-contour-sombre {
+    background-color: var(--encre);
+    color: var(--creme);
+}
+
+.bouton-contour-sombre:hover {
+    background-color: var(--marine-clair);
+}
+
+/* ===== Cartes crème ===== */
+.carte {
+    background-color: var(--creme);
+    color: var(--encre);
+    padding: 30px;
+    margin-bottom: 26px;
+}
+
+.carte h2 {
+    font-size: 1.6em;
+    color: var(--encre);
+}
+
+.carte a {
+    color: var(--accent-fonce);
+}
+
+.carte a.bouton {
+    color: #fff;
+}
+
+.carte a.bouton-contour-sombre {
+    color: var(--creme);
+}
+
+/* ===== Badges ===== */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-family: var(--police-titre);
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.badge-vert {
+    background-color: var(--vert-pale);
+    color: var(--vert);
+}
+
+.badge-attente {
+    background-color: var(--ambre-pale);
+    color: var(--ambre);
+}
+
+.badge-rouge {
+    background-color: var(--rouge-pale);
+    color: var(--rouge);
+}
+
+.badge-gris {
+    background-color: var(--creme-fonce);
+    color: var(--texte-doux);
+}
+
+/* ===== Messages ===== */
+.alerte {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.alerte-succes {
+    background-color: var(--vert-pale);
+    color: var(--vert);
+    border-left: 5px solid var(--vert);
+}
+
+.alerte-erreur {
+    background-color: var(--rouge-pale);
+    color: var(--rouge);
+    border-left: 5px solid var(--rouge);
+}
+
+/* ===== Tableaux (dans les cartes crème) ===== */
+.tableau-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    font-family: var(--police-titre);
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--texte-doux);
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--encre);
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid var(--bordure);
+    vertical-align: middle;
+}
+
+tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.cellule-date strong {
+    display: block;
+}
+
+.cellule-date span {
+    color: var(--texte-doux);
+    font-size: 0.9em;
+}
+
+.cellule-match {
+    font-weight: 600;
+}
+
+.cellule-action {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.vs {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    color: var(--accent);
+    margin: 0 6px;
+}
+
+/* Petit texte gris sous une info dans les tableaux (ex : la compétition) */
+.sous-texte {
+    display: block;
+    font-weight: 400;
+    font-size: 0.82em;
+    color: var(--texte-doux);
+}
+
+/* ===== Formulaires ===== */
+.champ {
+    margin-bottom: 18px;
+}
+
+.champ label {
+    display: block;
+    font-family: var(--police-titre);
+    font-weight: 600;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+}
+
+input[type=text], input[type=email], input[type=password],
+input[type=number], input[type=date], input[type=time],
+select, textarea {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 14px;
+    border: 1px solid var(--bordure);
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 0.95em;
+    background-color: #f8f4ec;
+    color: var(--encre);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(227, 2, 42, 0.15);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.aide {
+    display: block;
+    font-size: 0.82em;
+    color: var(--texte-doux);
+    margin-top: 5px;
+}
+
+.grille-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 18px;
+}
+
+.actions-formulaire {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* ===== Titres de page (admin / club), sur fond sombre ===== */
+.titre-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.titre-page h1 {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 3.4em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: var(--creme);
+    margin: 0;
+}
+
+.surtitre-sombre {
+    font-family: var(--police-titre);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78em;
+    font-weight: 700;
+    color: var(--accent-clair);
+    margin: 0 0 8px;
+}
+
+.carte .surtitre-sombre {
+    color: var(--accent-fonce);
+}
+
+.actions-titre {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.retour-sombre {
+    display: inline-block;
+    font-family: var(--police-titre);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--texte-clair);
+    text-decoration: none;
+    margin-bottom: 18px;
+}
+
+.carte .retour-sombre {
+    color: var(--texte-doux);
+}
+
+.retour-sombre:hover {
+    color: var(--accent-clair);
+}
+
+/* ===== Chiffres clés ===== */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.stat {
+    background-color: var(--creme);
+    color: var(--encre);
+    padding: 20px 24px;
+}
+
+.stat-valeur {
+    display: block;
+    font-family: var(--police-geante);
+    font-size: 3em;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--encre);
+}
+
+.stat-libelle {
+    font-family: var(--police-titre);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--texte-doux);
+}
+
+.stat-alerte {
+    background-color: var(--accent);
+}
+
+.stat-alerte .stat-valeur,
+.stat-alerte .stat-libelle {
+    color: #fff;
+}
+
+/* Cartes contenant un tableau : pas de marge intérieure sur les côtés */
+.carte-tableau {
+    padding: 26px 0 10px;
+}
+
+.carte-tableau h2 {
+    padding: 0 26px;
+}
+
+.vide-petit {
+    border: 2px dashed var(--bordure);
+    padding: 20px;
+    color: var(--texte-doux);
+    text-align: center;
+}
+
+.carte-tableau .vide-petit {
+    margin: 0 26px 16px;
+}
+
+/* ===== Logos (clubs et divisions) ===== */
+.logo-club,
+.logo-division,
+.logo-affiche {
+    object-fit: contain;
+    background-color: #fff;
+    flex-shrink: 0;
+}
+
+.logo-club {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.logo-division {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+}
+
+/* Rond avec les initiales, quand il n'y a pas de logo */
+.initiales {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--marine-clair), var(--violet));
+    color: #fff;
+    font-family: var(--police-titre);
+    font-weight: 700;
+    font-size: 0.72em;
+    padding: 0;
+}
+
+.logo-division.initiales {
+    font-size: 0.6em;
+}
+
+/* ===== Pastilles de niveau : du bleu (départemental) au rouge (national) ===== */
+.niveau {
+    display: inline-block;
+    font-family: var(--police-titre);
+    font-size: 0.7em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    color: #fff;
+    background-color: var(--marine-clair);
+}
+
+.niveau-regional {
+    background-color: var(--violet);
+}
+
+.niveau-national {
+    background-color: var(--accent);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 700px) {
+    .grille-2 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Sur téléphone, l'entête ne reste pas collée en haut (elle prendrait trop de place) */
+    .entete {
+        position: static;
+    }
+
+    .entete-contenu {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .menu {
+        width: 100%;
+    }
+
+    .menu a {
+        padding: 6px 8px;
+        font-size: 0.78em;
+    }
+
+    .carte {
+        padding: 22px;
+    }
+
+    .titre-page h1 {
+        font-size: 2.6em;
+    }
+}

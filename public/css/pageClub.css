@@ -1,0 +1,95 @@
+/* ==========================================================
+   PAGES CLUB : CONNEXION, INSCRIPTION, TABLEAU DE BORD, MODIFICATION
+   ========================================================== */
+
+/* Formulaire centré dans une carte */
+.carte-formulaire {
+    max-width: 440px;
+    margin: 0 auto 24px;
+    padding: 36px;
+}
+
+.carte-large {
+    max-width: 720px;
+}
+
+.formulaire-entete {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.formulaire-entete h1 {
+    font-family: var(--police-geante);
+    font-weight: 900;
+    font-size: 2.6em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--encre);
+    margin: 14px 0 8px;
+}
+
+.formulaire-entete p {
+    color: var(--texte-doux);
+    margin: 0;
+}
+
+.formulaire-entete-gauche {
+    text-align: left;
+}
+
+.formulaire-entete-gauche h1 {
+    margin-top: 0;
+}
+
+.formulaire-pied {
+    text-align: center;
+    color: var(--texte-doux);
+    font-size: 0.92em;
+    margin: 22px 0 0;
+}
+
+/* Sous-titres dans le formulaire de modification */
+.groupe-titre {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-fonce);
+    border-bottom: 2px solid var(--encre);
+    padding-bottom: 8px;
+    margin: 8px 0 18px;
+}
+
+/* Cases à cocher présentées comme des boutons */
+.cases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.case {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--bordure);
+    background-color: #f8f4ec;
+    padding: 11px 16px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.case:hover {
+    border-color: var(--accent);
+}
+
+.case input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
+@media (max-width: 700px) {
+    .carte-formulaire {
+        padding: 24px;
+    }
+}
